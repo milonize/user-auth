@@ -1,0 +1,20 @@
+{
+  "name": "user-auth",
+  "version": "1.0.0",
+  "description": "basic to advance",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MiloniZe",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "http-errors": "^2.0.0",
+    "mongoose": "^8.4.0",
+    "nodemon": "^3.1.2"
+  }
+}
