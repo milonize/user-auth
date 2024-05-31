@@ -24,7 +24,7 @@
 	             
 	            </div>
 				<div class="form-group">
-					<input id="" type="password" class="form-control" placeholder="Confrim Password" name="confrim-password" required>
+					<input id="" type="password" class="form-control" placeholder="Confrim Password" name="confrim_password" required>
 					<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 				  </div>
 	            <div class="form-group">
@@ -72,7 +72,9 @@ $.ajax({
 	data: form.serialize(), // serializes the form's elements.
 	success: function(data)
 	{
-	  console.log(data); // show response from the node script.
+	//   console.log(data.errors.confrim_password.msg); 
+	  console.log(data); 
+	
 	},beforeSend:function(){
 		console.log('sending..')
 	}
