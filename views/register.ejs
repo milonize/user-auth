@@ -1,5 +1,5 @@
 <%- include("./includes/header.ejs")%>
-	<body class="img js-fullheight" style="background-image: url(images/bg.jpg);">
+	<body class="img js-fullheight" style="background-image: url();">
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -15,24 +15,27 @@
 		      	<form class="signin-form" id="form">
 		      		<div class="form-group">
 		      			<input type="text" class="form-control" placeholder="Username" name="username" required>
+						<small id="username" style="font-size: 13px;" class="text-center error text-danger d-block"></small>
 		      		</div>
 					  <div class="form-group">
 						<input type="email" class="form-control" placeholder="Email" name="email" required>
+						<small id="email" style="font-size: 13px;" class="text-center error text-danger d-block"></small>
 					</div>
 	            <div class="form-group">
 	              <input id="password-field" type="password" class="form-control" placeholder="Password" name="password" required>
-	             
+				  <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+				  <small id="password" style="font-size: 13px;" class="text-center error text-danger d-block"></small>
 	            </div>
 				<div class="form-group">
-					<input id="" type="password" class="form-control" placeholder="Confrim Password" name="confrim_password" required>
-					<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+					<input id="password-field2" type="password" class="form-control" placeholder="Confrim Password" name="confrim_password" required>
+					<span toggle="#password-field2" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+					<small id="confrimpw" style="font-size: 13px;" class="text-center error text-danger d-block"></small>
 				  </div>
 	            <div class="form-group">
-	            	<button type="submit" class="form-control btn btn-primary submit px-3">Register</button>
+	            	<button id="btn" type="submit" class="form-control btn btn-primary submit px-3">Register</button>
 	            </div>
 	   
 	          </form>
-
 
 
 
@@ -73,10 +76,23 @@ $.ajax({
 	success: function(data)
 	{
 	//   console.log(data.errors.confrim_password.msg); 
-	  console.log(data); 
-	
+	//   console.log(data); 
+	function updateErrorMessage(field, error) {
+    const element = document.getElementById(field);
+    if (element) {
+        element.innerText = error ? error.msg : null;
+    }
+}
+
+updateErrorMessage('username', data.errors.username);
+updateErrorMessage('email', data.errors.email);
+updateErrorMessage('password', data.errors.password);
+updateErrorMessage('confirmpw', data.errors.confirm_password);
+
+	  document.getElementById('btn').innerText='REGISTER'
 	},beforeSend:function(){
-		console.log('sending..')
+		
+		document.getElementById('btn').innerText='Sending Data...'
 	}
 });
 

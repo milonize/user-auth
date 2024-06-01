@@ -1,5 +1,5 @@
 const PeopleDB = require('./../models/users/People')
-
+const bcrypt = require('bcrypt')
 // user view controller function
 function login(req, res, next) {
     
@@ -16,8 +16,13 @@ function registerView(req, res, next) {
 }
 
 async function registerPost(req, res, next) {
+const hashPw = await bcrypt.hash(req.body.password,10);
+
     if(req.body.password===req.body.confrim_password){
-        const newUser = new PeopleDB(req.body)
+        const newUser = new PeopleDB({
+            ...req.body,
+            password:hashPw
+        })
         try{
             await newUser.save();
             res.status(200).json({
