@@ -1,7 +1,7 @@
 
 //user view controller funtion
 function view(req,res,next){
-    res.send('user view page')
+    res.render('./users/dashboard')
 }
 
 

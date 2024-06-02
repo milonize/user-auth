@@ -6,7 +6,6 @@ const router = express.Router()
 
 
 
-router.get('/preview',view)
-
+router.get("/dashboard", view);
 
 module.exports=router;
