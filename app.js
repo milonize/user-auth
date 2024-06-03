@@ -26,8 +26,8 @@ app.use(express.json())
 app.use(express.static('public'))
 
 // call the all useable router here:
-app.use('/users',userRouter)
 app.use('/',authRouter)
+app.use('/users',userRouter)
 
 
 // 404 error

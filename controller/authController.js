@@ -25,6 +25,7 @@ async function registerPost(req, res, next) {
       password: hashPw,
     });
     try {
+      console.log('hello')
       await newUser.save();
       res.status(200).json({
         success: {
@@ -33,12 +34,13 @@ async function registerPost(req, res, next) {
           },
         },
       });
-      res.end();
+      res.end()
+    
     } catch (err) {
       res.status(500).json({
         message: err.message,
       });
-      res.end();
+     
     }
   } else {
     res.json({
@@ -51,7 +53,7 @@ async function registerPost(req, res, next) {
       },
     });
 
-    res.end();
+   
   }
 }
 
@@ -67,25 +69,25 @@ async function Userlogin(req, res, next) {
       );
       if (isPwvalid === true) {
         const userObject = {
-            username:userCheck.username,
-            email:userCheck.email,
-            role:userCheck.role
-        }
-        const jwToken = jwt.sign(userObject,process.env.JWT_SEC,{
-            expiresIn:86400000 //token expire in 1 day
+          username: userCheck.username,
+          email: userCheck.email,
+          role: userCheck.role,
+        };
+        const jwToken = jwt.sign(userObject, process.env.JWT_SEC, {
+          expiresIn: 86400000, //token expire in 1 day
         });
 
         //set cookie
-        res.cookie(process.env.APP_NAME,jwToken,{
-            maxAge:86400000,
-            httpOnly:true,
-            signed:true
-        })
-        res.locals.loginedUser = userObject
+        res.cookie(process.env.APP_NAME, jwToken, {
+          maxAge: 86400000,
+          httpOnly: true,
+          signed: true,
+        });
+        res.locals.loginedUser = userObject;
 
         res.render("./users/dashboard", {
-            tittle: 'Dashboard - Milonize'
-          });
+          tittle: "Dashboard - Milonize",
+        });
       } else {
         throw createErr("Invalid password");
       }
@@ -94,11 +96,12 @@ async function Userlogin(req, res, next) {
     }
   } catch (err) {
     res.render("login", {
-        error: {
-            loginErr:err.message
-        },
-        
-      });
+      errors: {
+        loginErr: err.message,
+      },
+
+      tittle: "Login Error",
+    });
   }
 }
 
@@ -108,5 +111,4 @@ module.exports = {
   registerView,
   registerPost,
   Userlogin,
-
 };

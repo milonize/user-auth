@@ -89,7 +89,11 @@ updateErrorMessage('email', data.errors.email);
 updateErrorMessage('password', data.errors.password);
 updateErrorMessage('confirmpw', data.errors.confirm_password);
 
-	  document.getElementById('btn').innerText='REGISTER'
+	  if(data.success.approved===true){
+		document.getElementById('btn').innerText='Success'
+	  }else{
+		document.getElementById('btn').innerText='REGISTER'
+	  }
 	},beforeSend:function(){
 		
 		document.getElementById('btn').innerText='Sending Data...'
