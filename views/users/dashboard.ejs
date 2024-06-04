@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=tittle.loginErr%></title>
+    <title><%= tittle %></title>
 </head>
 <body>
     <h3>Walcome to the dashboard...</h3>
+    <% if (loginedUser!==null) { %>
+  <p><%=loginedUser.username%></p>
+        <% } %>
 </body>
 </html>
+
+
+

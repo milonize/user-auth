@@ -4,7 +4,8 @@ const mongoose= require('mongoose')
 const bodyParser = require('body-parser');
 const userRouter = require('./router/userRoute')
 const authRouter = require('./router/authRouter')
-const {pageNotFound,defaultErrHandler} = require('./middliewares/errors/404')
+const {pageNotFound,defaultErrHandler} = require('./middliewares/errors/404');
+const cookieParser = require('cookie-parser');
 
 
 const app= express();
@@ -24,7 +25,7 @@ console.log('Database connection success')
 
 app.use(express.json())
 app.use(express.static('public'))
-
+app.use(cookieParser(process.env.COOKIE_SECR))
 // call the all useable router here:
 app.use('/',authRouter)
 app.use('/users',userRouter)

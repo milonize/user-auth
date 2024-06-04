@@ -22,8 +22,7 @@ if(checkUsername && checkUsername._id){
     }),
 
    check('password')
-   .isStrongPassword().withMessage('Use Strong Password')
-   .trim(),
+   .isStrongPassword().withMessage('Use Strong Password'),
 
    check('email')
    .isEmail().withMessage('Use an valid email address')

@@ -6,7 +6,8 @@ const jwt = require("jsonwebtoken");
 // user view controller function
 function login(req, res, next) {
   res.status(200).render("login", {
-    tittle: "Login Page",
+    tittle: "Login - Page",
+    loginErr:null
   });
 }
 
@@ -25,7 +26,7 @@ async function registerPost(req, res, next) {
       password: hashPw,
     });
     try {
-      console.log('hello')
+     
       await newUser.save();
       res.status(200).json({
         success: {
@@ -64,9 +65,11 @@ async function Userlogin(req, res, next) {
     });
     if (userCheck && userCheck._id) {
       const isPwvalid = await bcrypt.compare(
-        req.body.userInput,
+        req.body.password,
         userCheck.password
       );
+   
+    
       if (isPwvalid === true) {
         const userObject = {
           username: userCheck.username,
@@ -85,9 +88,10 @@ async function Userlogin(req, res, next) {
         });
         res.locals.loginedUser = userObject;
 
-        res.render("./users/dashboard", {
+        res.redirect("./users/dashboard", {
           tittle: "Dashboard - Milonize",
         });
+        
       } else {
         throw createErr("Invalid password");
       }
@@ -95,11 +99,10 @@ async function Userlogin(req, res, next) {
       throw createErr("User not found");
     }
   } catch (err) {
-    res.render("login", {
-      errors: {
-        loginErr: err.message,
-      },
-
+   
+ 
+    res.render("login",{
+      loginErr: err.message,
       tittle: "Login Error",
     });
   }
