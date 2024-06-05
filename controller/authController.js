@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 function login(req, res, next) {
   res.status(200).render("login", {
     tittle: "Login - Page",
-    loginErr:null
+    loginErr: null,
   });
 }
 
@@ -26,7 +26,6 @@ async function registerPost(req, res, next) {
       password: hashPw,
     });
     try {
-     
       await newUser.save();
       res.status(200).json({
         success: {
@@ -35,13 +34,11 @@ async function registerPost(req, res, next) {
           },
         },
       });
-      res.end()
-    
+      res.end();
     } catch (err) {
       res.status(500).json({
         message: err.message,
       });
-     
     }
   } else {
     res.json({
@@ -53,8 +50,6 @@ async function registerPost(req, res, next) {
         },
       },
     });
-
-   
   }
 }
 
@@ -68,8 +63,7 @@ async function Userlogin(req, res, next) {
         req.body.password,
         userCheck.password
       );
-   
-    
+
       if (isPwvalid === true) {
         const userObject = {
           username: userCheck.username,
@@ -88,10 +82,7 @@ async function Userlogin(req, res, next) {
         });
         res.locals.loginedUser = userObject;
 
-        res.redirect("./users/dashboard", {
-          tittle: "Dashboard - Milonize",
-        });
-        
+        res.redirect("/dashboard");
       } else {
         throw createErr("Invalid password");
       }
@@ -99,9 +90,7 @@ async function Userlogin(req, res, next) {
       throw createErr("User not found");
     }
   } catch (err) {
-   
- 
-    res.render("login",{
+    res.render("login", {
       loginErr: err.message,
       tittle: "Login Error",
     });

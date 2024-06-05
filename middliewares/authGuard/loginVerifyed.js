@@ -19,4 +19,30 @@ res.redirect('/login')
 
 }
 
-module.exports = loginVerifyed
+
+const gostUser = function(req,res,next){
+    let cookies = Object.keys(req.signedCookies).length>0 ? req.signedCookies : null;
+
+if(cookies){
+    res.redirect('/dashboard')
+}else{
+next()
+}
+}
+
+
+//logout
+const logout = function (req, res, next) {
+
+    res.clearCookie(process.env.APP_NAME)
+    res.redirect("/login");
+
+  res.end()
+      
+}
+
+module.exports = {
+    loginVerifyed,
+    gostUser,
+    logout
+}

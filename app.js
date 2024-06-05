@@ -28,7 +28,7 @@ app.use(express.static('public'))
 app.use(cookieParser(process.env.COOKIE_SECR))
 // call the all useable router here:
 app.use('/',authRouter)
-app.use('/users',userRouter)
+app.use('/dashboard',userRouter)
 
 
 // 404 error

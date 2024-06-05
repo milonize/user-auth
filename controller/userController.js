@@ -3,10 +3,9 @@
 function view(req,res,next){
 
     res.render('./users/dashboard',{
-      
+      tittle:'Dashboard'
     })
 }
-
 
 
 //export funtion

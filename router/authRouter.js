@@ -10,13 +10,13 @@ const {
   RegisterValidator,
   RegisterValidatorResult,
 } = require("../middliewares/validator/registerValidator");
-
+const {gostUser} =require('./../middliewares/authGuard/loginVerifyed')
 const router = express.Router();
 
-router.get("/login", login);
-router.post("/login", Userlogin);
+router.get("/login", gostUser,login);
+router.post("/login",gostUser, Userlogin);
 
-router.get("/register", registerView);
+router.get("/register",gostUser,registerView);
 router.post(
   "/register",
   RegisterValidator,
