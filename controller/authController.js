@@ -71,7 +71,8 @@ async function Userlogin(req, res, next) {
           role: userCheck.role,
         };
         const jwToken = jwt.sign(userObject, process.env.JWT_SEC, {
-          expiresIn: 86400000, //token expire in 1 day
+          expiresIn: 86400000, 
+          //token expire in 1 day
         });
 
         //set cookie
@@ -87,7 +88,7 @@ async function Userlogin(req, res, next) {
         throw createErr("Invalid password");
       }
     } else {
-      throw createErr("User not found");
+      throw createErr("User not exist");
     }
   } catch (err) {
     res.render("login", {
